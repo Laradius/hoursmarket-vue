@@ -31,16 +31,23 @@ export default {
   methods: {
     registerPost(e) {
       e.preventDefault();
+
+      const config = {
+        headers: { Authorization: `Bearer ${this.token}` },
+      };
+
+      const bodyParameters = {
+        password: this.password,
+      };
+
       axios
-        .post("https://localhost:44318/api/register/finish", {
-          password: this.password,
-        })
-        .then(function(response) {
-          console.log(response.data);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .post(
+          "https://localhost:44318/api/register/finish",
+          bodyParameters,
+          config
+        )
+        .then(console.log)
+        .catch(console.log);
     },
   },
 };
