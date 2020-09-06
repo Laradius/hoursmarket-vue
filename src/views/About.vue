@@ -1,5 +1,17 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <HourPreview></HourPreview>
   </div>
 </template>
+
+
+<script>
+import HourPreview from "../components/HoursPreview.vue";
+
+export default {
+  name: "About",
+  components: {
+    HourPreview,
+  },
+};
+</script>

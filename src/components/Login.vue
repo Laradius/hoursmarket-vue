@@ -33,10 +33,10 @@ export default {
           email: this.email,
           password: this.password,
         })
-        .then(function(response) {
-          console.log(response);
+        .then(function (response) {
+          localStorage.token = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
