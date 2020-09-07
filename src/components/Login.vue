@@ -36,6 +36,8 @@ export default {
     loginPost(e) {
       e.preventDefault();
 
+      var vm = this;
+
       axios
         .post("https://localhost:44318/api/login", {
           email: this.email,
@@ -43,7 +45,7 @@ export default {
         })
         .then(function(response) {
           localStorage.token = response.data;
-          this.$router.push("/");
+          vm.$router.push("/");
         })
         .catch(function(error) {
           console.log(error);
