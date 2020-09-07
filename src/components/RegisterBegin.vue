@@ -1,15 +1,27 @@
 <template>
   <div>
-    <form @submit="registerPost">
-      <p>Name:</p>
-      <input v-model="name" type="text" />
-      <br />
-      <p>Email:</p>
-      <input v-model="email" type="email" />
-      <br />
-      <br />
-      <input type="submit" value="Send Registration Link" />
-    </form>
+    <div class="container">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-4 formBorder">
+          <form @submit="registerPost">
+            <p>Name:</p>
+            <input v-model="name" class="form-control" type="text" />
+            <br />
+            <p>Email:</p>
+            <input v-model="email" class="form-control" type="email" />
+            <br />
+            <br />
+            <input
+              type="submit"
+              class="btn btn-primary"
+              value="Send Registration Link"
+            />
+          </form>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
   </div>
 </template>
 

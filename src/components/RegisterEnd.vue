@@ -38,7 +38,6 @@ export default {
   data() {
     return {
       password: "",
-      token: "",
     };
   },
 
@@ -47,7 +46,7 @@ export default {
       e.preventDefault();
 
       const config = {
-        headers: { Authorization: `Bearer ${this.token}` },
+        headers: { Authorization: `Bearer ${localStorage.registerToken}` },
       };
 
       const bodyParameters = {

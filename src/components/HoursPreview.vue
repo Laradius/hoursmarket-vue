@@ -2,6 +2,7 @@
   <div>
     <div v-for="hourOffer in hourOffers" :key="hourOffer.id">
       <HourOffer
+        :id="hourOffer.id"
         :name="hourOffer.name"
         :begindate="hourOffer.beginDate"
         :enddate="hourOffer.endDate"
@@ -9,7 +10,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -35,7 +35,7 @@ export default {
     };
     axios
       .get("https://localhost:44318/api/houroffers", config)
-      .then(function (response) {
+      .then(function(response) {
         console.log((vm.hourOffers = response.data));
       })
       .catch(console.log);

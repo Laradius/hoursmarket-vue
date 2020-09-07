@@ -1,15 +1,23 @@
 <template>
   <div>
-    <form @submit="loginPost">
-      <p>Email:</p>
-      <input v-model="email" type="email" />
-      <br />
-      <p>Password:</p>
-      <input v-model="password" type="password" />
-      <br />
-      <br />
-      <input type="submit" value="Login" />
-    </form>
+    <div class="container">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-4 formBorder">
+          <form @submit="loginPost" class="formInside">
+            <p>Email:</p>
+            <input v-model="email" class="form-control" type="email" />
+            <br />
+            <p>Password:</p>
+            <input v-model="password" class="form-control" type="password" />
+            <br />
+            <br />
+            <input type="submit" class="btn btn-primary" value="Login" />
+          </form>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,10 +41,10 @@ export default {
           email: this.email,
           password: this.password,
         })
-        .then(function (response) {
+        .then(function(response) {
           localStorage.token = response.data;
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     },
