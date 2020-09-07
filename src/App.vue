@@ -51,6 +51,15 @@ export default {
 </script>
 
 <style>
+.hourOffer {
+  border: 2px solid black;
+  background-color: rgba(46, 54, 53, 1);
+  margin: 10px 0px;
+  padding: 20px;
+  border-radius: 15px;
+  color: rgb(66, 185, 131);
+}
+
 body {
   height: 100vh;
   background: url("/images/background.jpg");
@@ -61,6 +70,10 @@ body {
 
 #nav a {
   color: white !important;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983 !important;
 }
 
 .footer {

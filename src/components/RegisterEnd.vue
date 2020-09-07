@@ -1,14 +1,22 @@
 <template>
   <div>
-    <form @submit="registerPost">
-      <h3>Finish registration by typing password.</h3>
-
-      <p>Password:</p>
-      <input v-model="password" type="password" />
-      <br />
-      <br />
-      <input type="submit" value="Register" />
-    </form>
+    <div class="container">
+      <div class="row">
+        <div class="col"></div>
+        <div class="col-4 formBorder">
+          <form @submit="registerPost">
+            <h3>Finish registration by typing password.</h3>
+            <br />
+            <p>Password:</p>
+            <input v-model="password" class="form-control" type="password" />
+            <br />
+            <br />
+            <input type="submit" class="btn btn-primary" value="Register" />
+          </form>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
   </div>
 </template>
 

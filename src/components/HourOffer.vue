@@ -1,8 +1,16 @@
 <template>
   <div>
-    <p>Name: {{ name }}</p>
-    <p>From {{ begindateformatted }} to {{ enddateformatted }}</p>
-    <button>Biorę!</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 hourOffer">
+          <p>Name: {{ name }}</p>
+          <p>From {{ begindateformatted }} to {{ enddateformatted }}</p>
+          <button class="btn btn-primary">Biorę!</button>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    </div>
   </div>
 </template>
 
