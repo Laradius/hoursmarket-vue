@@ -25,8 +25,6 @@ import axios from "axios";
 
 export default {
   destroyed() {
-    console.log("aa");
-
     if (localStorage.getItem("registerToken") != null) {
       localStorage.removeItem("registerToken");
     }

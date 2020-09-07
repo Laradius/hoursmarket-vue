@@ -2,8 +2,9 @@
   <div id="app">
     <Header></Header>
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/register">Register</router-link>
+      <router-link v-if="tokenExists" to="/">Home</router-link>
+      <router-link v-if="!tokenExists" to="/login">Login</router-link>
+      <router-link v-if="!tokenExists" to="/register">Register</router-link>
     </div>
     <router-view />
     <Footer></Footer>
@@ -20,22 +21,43 @@ export default {
     Footer,
   },
 
+  mounted() {
+    this.registerTokenExists = localStorage.registerToken != null;
+    this.tokenExists = localStorage.token != null;
+
+    console.log(this.tokenExists);
+
+    if (this.tokenExists) {
+      if (this.$route.name != "Home") this.$router.push("/");
+    } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
+      if (this.tokenExists) this.$router.push("/");
+      else this.$router.push("/login");
+    } else if (
+      !this.$route.name == "RegisterEnd" &&
+      !this.tokenExists &&
+      this.$route.name != "Login" &&
+      this.$route.name != "Register"
+    ) {
+      this.$router.push("/login");
+    }
+  },
+
   updated() {
     this.registerTokenExists = localStorage.registerToken != null;
     this.tokenExists = localStorage.token != null;
 
-    if (this.$route.name == "RegisterEnd") {
-      if (!this.registerTokenExists) {
-        this.$router.push("/");
-      }
-    } else {
-      if (!this.tokenExists) {
-        if (this.$route.name != "Register") {
-          if (this.$route.name != "Home") {
-            this.$router.push("/");
-          }
-        }
-      }
+    if (this.tokenExists) {
+      if (this.$route.name != "Home") this.$router.push("/");
+    } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
+      if (this.tokenExists) this.$router.push("/");
+      else this.$router.push("/login");
+    } else if (
+      !this.$route.name == "RegisterEnd" &&
+      !this.tokenExists &&
+      this.$route.name != "Login" &&
+      this.$route.name != "Register"
+    ) {
+      this.$router.push("/login");
     }
   },
 
