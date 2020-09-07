@@ -1,13 +1,45 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Home</router-link>|
       <router-link to="/register">Register</router-link>
     </div>
     <router-view />
   </div>
 </template>
+
+
+<script>
+export default {
+  updated() {
+    this.registerTokenExists = localStorage.registerToken != null;
+    this.tokenExists = localStorage.token != null;
+
+    if (this.$route.name == "RegisterEnd") {
+      if (!this.registerTokenExists) {
+        this.$router.push("/");
+      }
+    } else {
+      if (!this.tokenExists) {
+        if (this.$route.name != "Register") {
+          if (this.$route.name != "Home") {
+            this.$router.push("/");
+          }
+        }
+      }
+    }
+  },
+
+  data() {
+    return {
+      registerTokenExists: localStorage.registerToken != null,
+      tokenExists: localStorage.token != null,
+    };
+  },
+
+  name: "App",
+};
+</script>
 
 <style>
 #app {

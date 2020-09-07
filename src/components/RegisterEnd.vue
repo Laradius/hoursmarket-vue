@@ -16,8 +16,22 @@
 import axios from "axios";
 
 export default {
-  mounted() {
+  destroyed() {
+    console.log("aa");
+
+    if (localStorage.getItem("registerToken") != null) {
+      localStorage.removeItem("registerToken");
+    }
+  },
+
+  beforeCreate() {
     this.token = this.$route.query.token;
+
+    if (this.token != null) {
+      localStorage.registerToken = this.token;
+    } else {
+      localStorage.removeItem("registerToken");
+    }
   },
 
   name: "RegisterEnd",
