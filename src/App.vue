@@ -25,19 +25,20 @@ export default {
     this.registerTokenExists = localStorage.registerToken != null;
     this.tokenExists = localStorage.token != null;
 
-    console.log(this.tokenExists);
-
     if (this.tokenExists) {
-      if (this.$route.name != "Home") this.$router.push("/");
+      if (this.$route.name != "Home") {
+        this.$router.push("/");
+      }
     } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
       if (this.tokenExists) this.$router.push("/");
       else this.$router.push("/login");
     } else if (
-      !this.$route.name == "RegisterEnd" &&
+      !(this.$route.name == "RegisterEnd") &&
       !this.tokenExists &&
       this.$route.name != "Login" &&
       this.$route.name != "Register"
     ) {
+      console.log("reroute");
       this.$router.push("/login");
     }
   },
@@ -47,16 +48,19 @@ export default {
     this.tokenExists = localStorage.token != null;
 
     if (this.tokenExists) {
-      if (this.$route.name != "Home") this.$router.push("/");
+      if (this.$route.name != "Home") {
+        this.$router.push("/");
+      }
     } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
       if (this.tokenExists) this.$router.push("/");
       else this.$router.push("/login");
     } else if (
-      !this.$route.name == "RegisterEnd" &&
+      !(this.$route.name == "RegisterEnd") &&
       !this.tokenExists &&
       this.$route.name != "Login" &&
       this.$route.name != "Register"
     ) {
+      console.log("reroute");
       this.$router.push("/login");
     }
   },
