@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hourOfferPreview">
     <div v-for="hourOffer in hourOffers" :key="hourOffer.id">
       <HourOffer
         :id="hourOffer.id"
@@ -35,10 +35,17 @@ export default {
     };
     axios
       .get("https://localhost:44318/api/houroffers", config)
-      .then(function(response) {
-        console.log((vm.hourOffers = response.data));
+      .then(function (response) {
+        vm.hourOffers = response.data;
       })
       .catch(console.log);
   },
 };
 </script>
+
+
+<style scoped>
+.hourOfferPreview {
+  margin-bottom: 50px;
+}
+</style>

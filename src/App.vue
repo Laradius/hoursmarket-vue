@@ -87,7 +87,7 @@ export default {
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   background: url("/images/background.jpg");
   background-size: cover; /* <------ */
   background-repeat: no-repeat;
