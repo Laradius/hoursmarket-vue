@@ -6,6 +6,7 @@
         :name="hourOffer.name"
         :begindate="hourOffer.beginDate"
         :enddate="hourOffer.endDate"
+        :owned="hourOffer.owned"
       ></HourOffer>
     </div>
   </div>
@@ -33,12 +34,12 @@ export default {
     const config = {
       headers: { Authorization: `Bearer ${localStorage.token}` },
     };
+
     axios
-      .get("https://localhost:44318/api/houroffers", config)
+      .get("http://localhost:7777/api/houroffers", config)
       .then(function (response) {
         vm.hourOffers = response.data;
-      })
-      .catch(console.log);
+      });
   },
 };
 </script>

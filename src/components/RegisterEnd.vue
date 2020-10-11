@@ -49,6 +49,10 @@ export default {
 
   methods: {
     registerPost(e) {
+      var vm = this;
+      var errorOccured = false;
+      var error = null;
+
       e.preventDefault();
 
       const config = {
@@ -61,12 +65,28 @@ export default {
 
       axios
         .post(
-          "https://localhost:44318/api/register/finish",
+          "http://localhost:7777/api/register/finish",
           bodyParameters,
           config
         )
-        .then(console.log)
-        .catch(console.log);
+        .catch(function (err) {
+          error = err;
+          errorOccured = true;
+        })
+        .then(function () {
+          if (!errorOccured) {
+            vm.$router.push({
+              name: "Confirmation",
+              params: {
+                message: "Registration completed. You can log in now.",
+                error: false,
+                pushroute: "/Login",
+              },
+            });
+          } else {
+            vm.axiosHandleErrors(error);
+          }
+        });
     },
   },
 };

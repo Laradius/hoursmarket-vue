@@ -39,17 +39,34 @@ export default {
 
   methods: {
     registerPost(e) {
+      var vm = this;
+      var errorOccured = false;
+      var error = null;
+
       e.preventDefault();
       axios
-        .post("https://localhost:44318/api/register", {
+        .post("http://localhost:7777/api/register", {
           email: this.email,
           name: this.name,
         })
-        .then(function(response) {
-          console.log(response.data);
+        .catch(function (err) {
+          error = err;
+          errorOccured = true;
         })
-        .catch(function(error) {
-          console.log(error);
+        .then(function () {
+          if (!errorOccured) {
+            vm.$router.push({
+              name: "Confirmation",
+              params: {
+                message:
+                  "Request completed with no errors. Check your email to complete registration.",
+                error: false,
+                pushroute: "/",
+              },
+            });
+          } else {
+            vm.axiosHandleErrors(error);
+          }
         });
     },
   },

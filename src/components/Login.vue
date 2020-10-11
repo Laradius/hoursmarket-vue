@@ -37,18 +37,25 @@ export default {
       e.preventDefault();
 
       var vm = this;
+      var errorOccured = false;
+      var error = null;
 
       axios
-        .post("https://localhost:44318/api/login", {
+        .post("http://localhost:7777/api/login", {
           email: this.email,
           password: this.password,
         })
-        .then(function(response) {
-          localStorage.token = response.data;
-          vm.$router.push("/");
+        .catch(function (err) {
+          error = err;
+          errorOccured = true;
         })
-        .catch(function(error) {
-          console.log(error);
+        .then(function (response) {
+          if (!errorOccured) {
+            localStorage.token = response.data;
+            vm.$router.push("/");
+          } else {
+            vm.axiosHandleErrors(error);
+          }
         });
     },
   },

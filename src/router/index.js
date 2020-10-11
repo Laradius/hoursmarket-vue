@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/LoginView.vue";
 import RegisterEnd from "../views/RegisterEnd.vue";
 import Register from "../views/Register.vue";
+import Confirmation from "../views/Confirmation.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,13 @@ const routes = [
     path: "/RegisterEnd",
     name: "RegisterEnd",
     component: RegisterEnd,
+  },
+
+  {
+    path: "/Confirmation",
+    name: "Confirmation",
+    component: Confirmation,
+    props: true,
   },
 ];
 

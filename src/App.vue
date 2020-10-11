@@ -4,6 +4,7 @@
     <div id="nav">
       <router-link v-if="tokenExists" to="/">Home</router-link>
       <router-link v-if="!tokenExists" to="/login">Login</router-link>
+      <span v-if="!tokenExists">|</span>
       <router-link v-if="!tokenExists" to="/register">Register</router-link>
     </div>
     <router-view />
@@ -25,7 +26,9 @@ export default {
     this.registerTokenExists = localStorage.registerToken != null;
     this.tokenExists = localStorage.token != null;
 
-    if (this.tokenExists) {
+    // eslint-disable-next-line no-empty
+    if (this.$route.name == "Confirmation") {
+    } else if (this.tokenExists) {
       if (this.$route.name != "Home") {
         this.$router.push("/");
       }
@@ -38,7 +41,6 @@ export default {
       this.$route.name != "Login" &&
       this.$route.name != "Register"
     ) {
-      console.log("reroute");
       this.$router.push("/login");
     }
   },
@@ -46,9 +48,10 @@ export default {
   updated() {
     this.registerTokenExists = localStorage.registerToken != null;
     this.tokenExists = localStorage.token != null;
-
-    if (this.tokenExists) {
-      if (this.$route.name != "Home") {
+    // eslint-disable-next-line no-empty
+    if (this.$route.name == "Confirmation") {
+    } else if (this.tokenExists) {
+      if (this.$route.name != "Home" && this.$route.name != "Confirmation") {
         this.$router.push("/");
       }
     } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
@@ -60,7 +63,6 @@ export default {
       this.$route.name != "Login" &&
       this.$route.name != "Register"
     ) {
-      console.log("reroute");
       this.$router.push("/login");
     }
   },
