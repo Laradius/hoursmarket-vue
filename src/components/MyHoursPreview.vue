@@ -32,7 +32,7 @@ export default {
 
 
 
-  name: "HoursPreview",
+  name: "MyHoursPreview",
   components: {
     HourOffer,
     VueSlickCarousel
@@ -45,7 +45,7 @@ export default {
   "dots": true,
   "slidesToShow": 1,
   "rows": 3,
-  "arrows": false,
+    "arrows": false,
 }
     };
 
@@ -59,7 +59,7 @@ export default {
     };
 
     axios
-      .get("https://localhost:44318/api/houroffers", config)
+      .get("https://localhost:44318/api/houroffers/myoffers", config)
       .then(function (response) {
         vm.hourOffers = response.data;
       

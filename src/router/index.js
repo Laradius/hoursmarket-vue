@@ -5,6 +5,8 @@ import Login from "../views/LoginView.vue";
 import RegisterEnd from "../views/RegisterEnd.vue";
 import Register from "../views/Register.vue";
 import Confirmation from "../views/Confirmation.vue";
+import MyHours from "../views/MyHours.vue";
+import EditHourOffer from "../views/EditHourOffer.vue";
 
 Vue.use(VueRouter);
 
@@ -38,6 +40,17 @@ const routes = [
     component: Confirmation,
     props: true,
   },
+   {
+    path: "/MyHours",
+    name: "MyHours",
+    component: MyHours,
+  },
+  {
+       path: "/EditHourOffer",
+    name: "EditHourOffer",
+    component: EditHourOffer,
+    props: true,
+   }
 ];
 
 const router = new VueRouter({

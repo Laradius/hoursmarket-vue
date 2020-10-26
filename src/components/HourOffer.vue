@@ -6,6 +6,10 @@
         <div class="col-4 hourOffer">
           <p>Name: {{ name }}</p>
           <p>Date: {{ begindateformatted }} to {{ enddateformatted }}</p>
+           <button style="margin-right: 5px;" @click="editHourOffer" v-if="owned" class="btn btn-primary">
+            Edytuj
+          </button>
+          
           <button @click="deleteHourOffer" v-if="owned" class="btn btn-danger">
             Usuwam!
           </button>
@@ -27,6 +31,16 @@ export default {
   name: "HourOffer",
 
   methods: {
+
+editHourOffer() {
+   this.$router.push({
+          name: "EditHourOffer",
+          params: {
+           id: this.id,
+           originpath: this.$route
+          },
+        });
+},
     deleteHourOffer() {
       var vm = this;
       var errorOccured = false;

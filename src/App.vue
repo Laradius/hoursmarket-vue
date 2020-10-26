@@ -4,7 +4,9 @@
     <Header></Header>
   <Logout v-if="tokenExists" class="logout-button"></Logout>
     <div id="nav">
-      <router-link v-if="tokenExists" to="/">Home</router-link>
+      <router-link v-if="tokenExists" to="/">Home</router-link> 
+      <span v-if="tokenExists">|</span>
+       <router-link v-if="tokenExists" to="/MyHours">My Hours</router-link>
       <router-link v-if="!tokenExists" to="/login">Login</router-link>
       <span v-if="!tokenExists">|</span>
       <router-link v-if="!tokenExists" to="/register">Register</router-link> 
@@ -34,7 +36,7 @@ export default {
     // eslint-disable-next-line no-empty
     if (this.$route.name == "Confirmation") {
     } else if (this.tokenExists) {
-      if (this.$route.name != "Home") {
+      if (this.$route.name != "Home" && this.$route.name != "MyHours" && this.$route.name !="EditHourOffer") {
         this.$router.push("/");
       }
     } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
@@ -56,7 +58,7 @@ export default {
     // eslint-disable-next-line no-empty
     if (this.$route.name == "Confirmation") {
     } else if (this.tokenExists) {
-      if (this.$route.name != "Home" && this.$route.name != "Confirmation") {
+      if (this.$route.name != "Home" && this.$route.name != "MyHours" && this.$route.name !="EditHourOffer") {
         this.$router.push("/");
       }
     } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
@@ -96,9 +98,8 @@ export default {
 body {
   min-height: 100vh;
   background: url("/images/background.jpg");
-  background-size: cover; /* <------ */
+  background-size: 100% 1400px;
   background-repeat: no-repeat;
-  background-position: center center; /* optional, center the image */
 }
 
 #nav a {
