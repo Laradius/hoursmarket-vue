@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-  
     <Header></Header>
-  <Logout v-if="tokenExists" class="logout-button"></Logout>
+    <Logout v-if="tokenExists" class="logout-button"></Logout>
     <div id="nav">
-      <router-link v-if="tokenExists" to="/">Home</router-link> 
+      <router-link v-if="tokenExists" to="/">Home</router-link>
       <span v-if="tokenExists">|</span>
-       <router-link v-if="tokenExists" to="/MyHours">My Hours</router-link>
+      <router-link v-if="tokenExists" to="/MyHours">My Hours</router-link>
       <router-link v-if="!tokenExists" to="/login">Login</router-link>
       <span v-if="!tokenExists">|</span>
-      <router-link v-if="!tokenExists" to="/register">Register</router-link> 
+      <router-link v-if="!tokenExists" to="/register">Register</router-link>
     </div>
     <router-view />
     <Footer></Footer>
@@ -28,7 +27,6 @@ export default {
     Logout,
   },
 
-
   mounted() {
     this.registerTokenExists = localStorage.registerToken != null;
     this.tokenExists = localStorage.token != null;
@@ -36,7 +34,12 @@ export default {
     // eslint-disable-next-line no-empty
     if (this.$route.name == "Confirmation") {
     } else if (this.tokenExists) {
-      if (this.$route.name != "Home" && this.$route.name != "MyHours" && this.$route.name !="EditHourOffer") {
+      if (
+        this.$route.name != "Home" &&
+        this.$route.name != "MyHours" &&
+        this.$route.name != "EditHourOffer" &&
+        this.$route.name != "AdminPanel"
+      ) {
         this.$router.push("/");
       }
     } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {
@@ -58,7 +61,12 @@ export default {
     // eslint-disable-next-line no-empty
     if (this.$route.name == "Confirmation") {
     } else if (this.tokenExists) {
-      if (this.$route.name != "Home" && this.$route.name != "MyHours" && this.$route.name !="EditHourOffer") {
+      if (
+        this.$route.name != "Home" &&
+        this.$route.name != "MyHours" &&
+        this.$route.name != "EditHourOffer" &&
+        this.$route.name != "AdminPanel"
+      ) {
         this.$router.push("/");
       }
     } else if (!this.registerTokenExists && this.$route.name == "RegisterEnd") {

@@ -7,6 +7,7 @@ import Register from "../views/Register.vue";
 import Confirmation from "../views/Confirmation.vue";
 import MyHours from "../views/MyHours.vue";
 import EditHourOffer from "../views/EditHourOffer.vue";
+import AdminPanel from "../views/AdminPanel.vue";
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,12 @@ const routes = [
     name: "EditHourOffer",
     component: EditHourOffer,
     props: true,
+  },
+  
+  {
+   path: "/AdminPanel",
+    name: "AdminPanel",
+    component: AdminPanel,
    }
 ];
 
