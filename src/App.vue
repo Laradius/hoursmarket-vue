@@ -1,11 +1,13 @@
 <template>
   <div id="app">
+  
     <Header></Header>
+  <Logout v-if="tokenExists" class="logout-button"></Logout>
     <div id="nav">
       <router-link v-if="tokenExists" to="/">Home</router-link>
       <router-link v-if="!tokenExists" to="/login">Login</router-link>
       <span v-if="!tokenExists">|</span>
-      <router-link v-if="!tokenExists" to="/register">Register</router-link>
+      <router-link v-if="!tokenExists" to="/register">Register</router-link> 
     </div>
     <router-view />
     <Footer></Footer>
@@ -15,12 +17,15 @@
 <script>
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import Logout from "./components/Logout.vue";
 
 export default {
   components: {
     Header,
     Footer,
+    Logout,
   },
+
 
   mounted() {
     this.registerTokenExists = localStorage.registerToken != null;

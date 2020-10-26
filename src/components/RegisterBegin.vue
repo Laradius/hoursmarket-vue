@@ -6,10 +6,10 @@
         <div class="col-4 formBorder">
           <form @submit="registerPost">
             <p>Name:</p>
-            <input v-model="name" class="form-control" type="text" />
+            <input v-model="name" class="form-control" type="text" required/>
             <br />
             <p>Email:</p>
-            <input v-model="email" class="form-control" type="email" />
+            <input v-model="email" class="form-control" type="email" required />
             <br />
             <br />
             <input
@@ -45,7 +45,7 @@ export default {
 
       e.preventDefault();
       axios
-        .post("http://localhost:7777/api/register", {
+        .post("https://localhost:44318/api/register", {
           email: this.email,
           name: this.name,
         })

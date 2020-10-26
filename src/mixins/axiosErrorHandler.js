@@ -29,7 +29,7 @@ Vue.mixin({
           name: "Confirmation",
           params: {
             message:
-              "Error code: 401 (Unauthorized. You can't access this resource.)",
+              "Error code: 401 (Unauthorized. Login failed or not logged in.)",
             error: true,
             pushroute: "/",
           },

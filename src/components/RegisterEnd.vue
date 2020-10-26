@@ -4,11 +4,13 @@
       <div class="row">
         <div class="col"></div>
         <div class="col-4 formBorder">
+<p v-if="badPassword" class="text-danger  p-4 ">Password must contain minimum eight characters, at least one letter, one number and one special character</p>
+
           <form @submit="registerPost">
             <h3>Finish registration by typing password.</h3>
             <br />
             <p>Password:</p>
-            <input v-model="password" class="form-control" type="password" />
+            <input v-model="password" class="form-control" type="password" required/>
             <br />
             <br />
             <input type="submit" class="btn btn-primary" value="Register" />
@@ -44,6 +46,7 @@ export default {
   data() {
     return {
       password: "",
+      badPassword: false,
     };
   },
 
@@ -54,6 +57,11 @@ export default {
       var error = null;
 
       e.preventDefault();
+var reg = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,32}$");
+      if(!reg.test(this.password)) {
+        this.badPassword = true;
+        return;
+      }
 
       const config = {
         headers: { Authorization: `Bearer ${localStorage.registerToken}` },
@@ -65,7 +73,7 @@ export default {
 
       axios
         .post(
-          "http://localhost:7777/api/register/finish",
+          "https://localhost:44318/api/register/finish",
           bodyParameters,
           config
         )

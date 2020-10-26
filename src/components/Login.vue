@@ -6,10 +6,10 @@
         <div class="col-4 formBorder">
           <form @submit="loginPost" class="formInside">
             <p>Email:</p>
-            <input v-model="email" class="form-control" type="email" />
+            <input v-model="email" class="form-control" type="email" required />
             <br />
             <p>Password:</p>
-            <input v-model="password" class="form-control" type="password" />
+            <input v-model="password" class="form-control" type="password" required />
             <br />
             <br />
             <input type="submit" class="btn btn-primary" value="Login" />
@@ -41,7 +41,7 @@ export default {
       var error = null;
 
       axios
-        .post("http://localhost:7777/api/login", {
+        .post("https://localhost:44318/api/login", {
           email: this.email,
           password: this.password,
         })

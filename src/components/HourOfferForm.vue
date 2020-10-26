@@ -68,7 +68,7 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("http://localhost:7777/api/houroffers/checkunassigned", config)
+      .get("https://localhost:44318/api/houroffers/checkunassigned", config)
       .then(function (response) {
         vm.unassigned = response.data.unassigned;
         vm.apiOffline = false;
@@ -148,7 +148,7 @@ export default {
       };
 
       axios
-        .post("http://localhost:7777/api/houroffers", bodyParameters, config)
+        .post("https://localhost:44318/api/houroffers", bodyParameters, config)
         .catch(function (err) {
           error = err;
           errorOccured = true;
@@ -172,8 +172,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 [v-cloak] {
   display: none;
 }
+.formBorder {
+  min-width:  250px;
+}
+
 </style>

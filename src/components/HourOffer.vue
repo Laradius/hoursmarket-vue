@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="row">
-        <div class="col-4"></div>
+        <div class="col"></div>
         <div class="col-4 hourOffer">
           <p>Name: {{ name }}</p>
           <p>Date: {{ begindateformatted }} to {{ enddateformatted }}</p>
@@ -13,7 +13,7 @@
             Biorę!
           </button>
         </div>
-        <div class="col-4"></div>
+        <div class="col"></div>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@ export default {
       var errorOccured = false;
       var error = null;
       axios
-        .delete("http://localhost:7777/api/houroffers/" + vm.id, {
+        .delete("https://localhost:44318/api/houroffers/" + vm.id, {
           headers: {
             Authorization: `Bearer ${localStorage.token}`,
           },
@@ -62,7 +62,7 @@ export default {
       var errorOccured = false;
       var error = null;
       axios
-        .delete("http://localhost:7777/api/houroffers/takehouroffer/" + vm.id, {
+        .delete("https://localhost:44318/api/houroffers/takehouroffer/" + vm.id, {
           headers: {
             Authorization: `Bearer ${localStorage.token}`,
           },
@@ -98,3 +98,11 @@ export default {
   props: ["id", "name", "begindate", "enddate", "owned"],
 };
 </script>
+
+<style scoped>
+
+.hourOffer {
+  min-width: 250px;
+}
+
+</style>
