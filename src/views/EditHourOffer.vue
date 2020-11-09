@@ -1,8 +1,10 @@
 <template>
   <div>
-
-<HourOfferEditForm v-if="this.id != null" :id="this.id" :originpath="this.originpath"></HourOfferEditForm>
-   
+    <HourOfferEditForm
+      v-if="this.id != null"
+      :id="this.id"
+      :originpath="this.originpath"
+    ></HourOfferEditForm>
   </div>
 </template>
 
@@ -14,16 +16,16 @@ export default {
   name: "EditHourOffer",
   props: ["id", "originpath"],
 
-   components: {
-    HourOfferEditForm
+  components: {
+    HourOfferEditForm,
   },
 
- beforeMount() {
-if (this.id == null) {
-     this.$router.push("/");
-}
- },
-  
+  beforeMount() {
+    if (this.id == null) {
+      this.$router.push("/");
+    }
+  },
+
   data() {
     return {};
   },

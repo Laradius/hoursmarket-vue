@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <HourOfferForm
-    ></HourOfferForm>
+    <HourOfferForm></HourOfferForm>
     <HourPreview></HourPreview>
   </div>
 </template>

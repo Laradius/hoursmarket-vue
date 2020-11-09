@@ -1,6 +1,9 @@
 <template>
   <div class="hourOfferPreview">
-    <span v-if="hourOffers.length < 1" class="text-warning bg-dark p-4 rounded">
+    <span
+      v-if="!this.unassigned && this.requestDone && hourOffers.length < 1"
+      class="text-warning bg-dark p-4 rounded"
+    >
       No hour offers currently posted. Post some at Home section.
     </span>
 
@@ -55,10 +58,9 @@ export default {
         rows: 3,
         arrows: false,
       },
-
-      unassigned: false,
-      apiOffline: true,
       requestDone: false,
+      unassigned: true,
+      apiOffline: true,
     };
   },
 
@@ -70,11 +72,14 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("https://localhost:44318/api/houroffers/checkunassigned", config1)
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/houroffers/checkunassigned",
+        config1
+      )
       .then(function (response) {
-        vm.unassigned = response.data.unassigned;
         vm.apiOffline = false;
         vm.requestDone = true;
+        vm.unassigned = response.data.unassigned;
       })
       .catch(function (error) {
         console.log(error);
@@ -87,7 +92,10 @@ export default {
     };
 
     axios
-      .get("https://localhost:44318/api/houroffers/myoffers", config2)
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/houroffers/myoffers",
+        config2
+      )
       .then(function (response) {
         vm.hourOffers = response.data;
       });

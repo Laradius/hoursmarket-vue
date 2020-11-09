@@ -70,7 +70,7 @@ export default {
 
       axios
         .post(
-          "https://localhost:44318/api/adminpanel/changerole",
+          "http://api.hourmarket.hostingasp.pl/api/adminpanel/changerole",
           bodyParameters,
           config
         )
@@ -103,7 +103,10 @@ export default {
     };
 
     axios
-      .get("https://localhost:44318/api/adminpanel/getroles", config)
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/adminpanel/getroles",
+        config
+      )
       .then(function (response) {
         vm.roles = response.data;
       });

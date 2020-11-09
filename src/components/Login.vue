@@ -9,7 +9,13 @@
             <input v-model="email" class="form-control" type="email" required />
             <br />
             <p>Password:</p>
-            <input v-model="password" class="form-control" type="password" required />
+            <input
+              ref="loginbutton"
+              v-model="password"
+              class="form-control"
+              type="password"
+              required
+            />
             <br />
             <br />
             <input type="submit" class="btn btn-primary" value="Login" />
@@ -39,9 +45,10 @@ export default {
       var vm = this;
       var errorOccured = false;
       var error = null;
+      this.$refs.loginbutton.disabled = true;
 
       axios
-        .post("https://localhost:44318/api/login", {
+        .post("http://api.hourmarket.hostingasp.pl/api/login", {
           email: this.email,
           password: this.password,
         })

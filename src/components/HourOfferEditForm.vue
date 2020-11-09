@@ -31,11 +31,14 @@
             <input v-model="endhour" class="form-control" type="time" />
             <br />
             <br />
-            <input style="margin-right: 5px;" type="submit" class="btn btn-success" value="Zatwierdź" />
-             <button @click="takeMeBack" class="btn btn-primary"  > Wróć </button>
-           
+            <input
+              style="margin-right: 5px"
+              type="submit"
+              class="btn btn-success"
+              value="Zatwierdź"
+            />
+            <button @click="takeMeBack" class="btn btn-primary">Wróć</button>
           </form>
-          
         </div>
         <div class="col"></div>
       </div>
@@ -51,7 +54,7 @@ export default {
   name: "HourOfferEditForm",
 
   props: ["id", "originpath"],
-  
+
   data() {
     return {
       endhour: null,
@@ -74,14 +77,15 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("https://localhost:44318/api/houroffers/" + vm.id, config)
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/houroffers/" + vm.id,
+        config
+      )
       .then(function (response) {
-
-      vm.beginhour = moment(response.data.beginDate).format("HH:mm")
-      vm.begindate = moment(response.data.beginDate).format("YYYY-MM-DD")
-      vm.endhour = moment(response.data.endDate).format("HH:mm")
-      vm.enddate = moment(response.data.endDate).format("YYYY-MM-DD")
-
+        vm.beginhour = moment(response.data.beginDate).format("HH:mm");
+        vm.begindate = moment(response.data.beginDate).format("YYYY-MM-DD");
+        vm.endhour = moment(response.data.endDate).format("HH:mm");
+        vm.enddate = moment(response.data.endDate).format("YYYY-MM-DD");
 
         vm.apiOffline = false;
         vm.requestDone = true;
@@ -92,9 +96,8 @@ export default {
   },
 
   methods: {
-
     takeMeBack(e) {
-        e.preventDefault();
+      e.preventDefault();
       this.$router.push(this.originpath.fullPath);
     },
 
@@ -154,27 +157,29 @@ export default {
         return;
       }
 
-    
-
       const bodyParameters = [
-  {
-    "op": "replace",
-    "path": "/beginDate",
-    "value": moment
-          .utc(this.begindate.toString() + " " + this.beginhour.toString())
-          .toJSON()
-  },
-   {
-    "op": "replace",
-    "path": "/endDate",
-    "value":  moment
-          .utc(this.enddate.toString() + " " + this.endhour.toString())
-          .toJSON()
-  }
-]
+        {
+          op: "replace",
+          path: "/beginDate",
+          value: moment
+            .utc(this.begindate.toString() + " " + this.beginhour.toString())
+            .toJSON(),
+        },
+        {
+          op: "replace",
+          path: "/endDate",
+          value: moment
+            .utc(this.enddate.toString() + " " + this.endhour.toString())
+            .toJSON(),
+        },
+      ];
 
       axios
-        .patch("https://localhost:44318/api/houroffers/" + vm.id, bodyParameters, config)
+        .patch(
+          "http://api.hourmarket.hostingasp.pl/api/houroffers/" + vm.id,
+          bodyParameters,
+          config
+        )
         .catch(function (err) {
           error = err;
           errorOccured = true;
@@ -203,7 +208,6 @@ export default {
   display: none;
 }
 .formBorder {
-  min-width:  250px;
+  min-width: 250px;
 }
-
 </style>

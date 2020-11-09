@@ -31,7 +31,12 @@
             <input v-model="endhour" class="form-control" type="time" />
             <br />
             <br />
-            <input type="submit" class="btn btn-primary" value="Wystaw" />
+            <input
+              :disabled="disabled"
+              type="submit"
+              class="btn btn-primary"
+              value="Wystaw"
+            />
           </form>
         </div>
         <div class="col"></div>
@@ -57,6 +62,7 @@ export default {
       requestDone: false,
       errorMessage: null,
       error: false,
+      disabled: false,
     };
   },
 
@@ -68,7 +74,10 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("https://localhost:44318/api/houroffers/checkunassigned", config)
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/houroffers/checkunassigned",
+        config
+      )
       .then(function (response) {
         vm.unassigned = response.data.unassigned;
         vm.apiOffline = false;
@@ -138,6 +147,8 @@ export default {
         return;
       }
 
+      this.disabled = true;
+
       const bodyParameters = {
         begindate: moment
           .utc(this.begindate.toString() + " " + this.beginhour.toString())
@@ -148,7 +159,11 @@ export default {
       };
 
       axios
-        .post("https://localhost:44318/api/houroffers", bodyParameters, config)
+        .post(
+          "http://api.hourmarket.hostingasp.pl/api/houroffers",
+          bodyParameters,
+          config
+        )
         .catch(function (err) {
           error = err;
           errorOccured = true;
@@ -177,7 +192,6 @@ export default {
   display: none;
 }
 .formBorder {
-  min-width:  250px;
+  min-width: 250px;
 }
-
 </style>

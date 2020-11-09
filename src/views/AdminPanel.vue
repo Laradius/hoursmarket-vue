@@ -39,7 +39,10 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("https://localhost:44318/api/adminpanel/checkrole", config)
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/adminpanel/checkrole",
+        config
+      )
       .then(function () {
         vm.connected = true;
       })

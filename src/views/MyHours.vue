@@ -9,11 +9,10 @@
 
 import MyHourPreview from "../components/MyHoursPreview.vue";
 
-
 export default {
   name: "Home",
   components: {
-    MyHourPreview
+    MyHourPreview,
   },
 
   data() {

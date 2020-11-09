@@ -1,68 +1,84 @@
 <template>
   <div class="hourOfferPreview">
-    
-    
-<VueSlickCarousel  v-if="hourOffers.length > 0"  v-bind="settings">
-    <div v-for="hourOffer in hourOffers" :key="hourOffer.id">
-      <HourOffer
-        :id="hourOffer.id"
-        :name="hourOffer.name"
-        :begindate="hourOffer.beginDate"
-        :enddate="hourOffer.endDate"
-        :owned="hourOffer.owned"
-      ></HourOffer>
-
-    
-    </div>
+    <br v-if="hourOffers.length < 1 && this.requestDone" />
+    <br v-if="hourOffers.length < 1 && this.requestDone" />
+    <span
+      v-if="hourOffers.length < 1 && this.requestDone && !unassigned"
+      class="text-warning bg-dark p-4 rounded"
+    >
+      No hour offers currently posted. Now that's sad.
+    </span>
+    <VueSlickCarousel v-if="hourOffers.length > 0" v-bind="settings">
+      <div v-for="hourOffer in hourOffers" :key="hourOffer.id">
+        <HourOffer
+          :id="hourOffer.id"
+          :name="hourOffer.name"
+          :begindate="hourOffer.beginDate"
+          :enddate="hourOffer.endDate"
+          :owned="hourOffer.owned"
+        ></HourOffer>
+      </div>
     </VueSlickCarousel>
-      
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import HourOffer from "../components/HourOffer.vue";
-import VueSlickCarousel from 'vue-slick-carousel'
-  import 'vue-slick-carousel/dist/vue-slick-carousel.css'
-  // optional style for arrows & dots
-  import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import VueSlickCarousel from "vue-slick-carousel";
+import "vue-slick-carousel/dist/vue-slick-carousel.css";
+// optional style for arrows & dots
+import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 
 export default {
-
-
-
-
   name: "HoursPreview",
   components: {
     HourOffer,
-    VueSlickCarousel
+    VueSlickCarousel,
   },
 
   data() {
     return {
       hourOffers: [],
       settings: {
-  "dots": true,
-  "slidesToShow": 1,
-  "rows": 3,
-  "arrows": false,
-}
+        dots: true,
+        slidesToShow: 1,
+        rows: 3,
+        arrows: false,
+      },
+      requestDone: false,
+      unassigned: true,
     };
-
   },
 
   beforeMount() {
     var vm = this;
+
+    const config1 = {
+      headers: { Authorization: `Bearer ${localStorage.token}` },
+    };
+    vm.apiOffline = true;
+    axios
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/houroffers/checkunassigned",
+        config1
+      )
+      .then(function (response) {
+        vm.unassigned = response.data.unassigned;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     const config = {
       headers: { Authorization: `Bearer ${localStorage.token}` },
     };
 
     axios
-      .get("https://localhost:44318/api/houroffers", config)
+      .get("http://api.hourmarket.hostingasp.pl/api/houroffers", config)
       .then(function (response) {
         vm.hourOffers = response.data;
-      
+        vm.requestDone = true;
       });
   },
 };
@@ -72,24 +88,19 @@ export default {
 <style >
 .hourOfferPreview {
   margin-bottom: 50px;
-
 }
 
-.slick-dots  {
+.slick-dots {
   bottom: -5px !important;
 }
 
-
 .slick-dots li button:before {
-    color: white !important;
-    opacity: 1;
-  }
-
-  .slick-dots li.slick-active button:before {
-    color:orange !important;
-    opacity:1;
-    
+  color: white !important;
+  opacity: 1;
 }
 
-
+.slick-dots li.slick-active button:before {
+  color: orange !important;
+  opacity: 1;
+}
 </style>

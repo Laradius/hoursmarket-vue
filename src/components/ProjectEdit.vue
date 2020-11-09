@@ -14,11 +14,11 @@
             <select v-model="selected" class="custom-select" required>
               <option hidden disabled :value="null">Select option</option>
               <option
-                v-bind:value="role.value"
-                :key="role.id"
-                v-for="role in roles"
+                v-bind:value="project.value"
+                :key="project.id"
+                v-for="project in projects"
               >
-                {{ role.role }}
+                {{ project.project }}
               </option>
             </select>
             <br />
@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       selected: null,
-      roles: null,
+      projects: null,
       email: null,
     };
   },
@@ -70,7 +70,7 @@ export default {
 
       axios
         .post(
-          "https://localhost:44318/api/adminpanel/changeproject",
+          "http://api.hourmarket.hostingasp.pl/api/adminpanel/changeproject",
           bodyParameters,
           config
         )
@@ -103,9 +103,12 @@ export default {
     };
 
     axios
-      .get("https://localhost:44318/api/adminpanel/getcurrentprojects", config)
+      .get(
+        "http://api.hourmarket.hostingasp.pl/api/adminpanel/getcurrentprojects",
+        config
+      )
       .then(function (response) {
-        vm.roles = response.data;
+        vm.projects = response.data;
       });
   },
 };

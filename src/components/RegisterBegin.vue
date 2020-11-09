@@ -6,13 +6,14 @@
         <div class="col-4 formBorder">
           <form @submit="registerPost">
             <p>Name:</p>
-            <input v-model="name" class="form-control" type="text" required/>
+            <input v-model="name" class="form-control" type="text" required />
             <br />
             <p>Email:</p>
             <input v-model="email" class="form-control" type="email" required />
             <br />
             <br />
             <input
+              ref="registerbutton"
               type="submit"
               class="btn btn-primary"
               value="Send Registration Link"
@@ -42,10 +43,10 @@ export default {
       var vm = this;
       var errorOccured = false;
       var error = null;
-
+      this.$refs.registerbutton;
       e.preventDefault();
       axios
-        .post("https://localhost:44318/api/register", {
+        .post("http://api.hourmarket.hostingasp.pl/api/register", {
           email: this.email,
           name: this.name,
         })

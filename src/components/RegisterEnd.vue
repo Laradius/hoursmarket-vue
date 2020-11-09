@@ -4,16 +4,29 @@
       <div class="row">
         <div class="col"></div>
         <div class="col-4 formBorder">
-<p v-if="badPassword" class="text-danger  p-4 ">Password must contain minimum eight characters, at least one letter, one number and one special character</p>
+          <p v-if="badPassword" class="text-danger p-4">
+            Password must contain minimum eight characters, at least one letter,
+            one number and one special character
+          </p>
 
           <form @submit="registerPost">
             <h3>Finish registration by typing password.</h3>
             <br />
             <p>Password:</p>
-            <input v-model="password" class="form-control" type="password" required/>
+            <input
+              v-model="password"
+              class="form-control"
+              type="password"
+              required
+            />
             <br />
             <br />
-            <input type="submit" class="btn btn-primary" value="Register" />
+            <input
+              :disabled="disabled"
+              type="submit"
+              class="btn btn-primary"
+              value="Register"
+            />
           </form>
         </div>
         <div class="col"></div>
@@ -47,6 +60,7 @@ export default {
     return {
       password: "",
       badPassword: false,
+      disabled: false,
     };
   },
 
@@ -55,14 +69,16 @@ export default {
       var vm = this;
       var errorOccured = false;
       var error = null;
-
       e.preventDefault();
-var reg = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,32}$");
-      if(!reg.test(this.password)) {
+      var reg = new RegExp(
+        "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,32}$"
+      );
+      if (!reg.test(this.password)) {
         this.badPassword = true;
         return;
       }
 
+      this.disabled = true;
       const config = {
         headers: { Authorization: `Bearer ${localStorage.registerToken}` },
       };
@@ -73,7 +89,7 @@ var reg = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&
 
       axios
         .post(
-          "https://localhost:44318/api/register/finish",
+          "http://api.hourmarket.hostingasp.pl/api/register/finish",
           bodyParameters,
           config
         )
