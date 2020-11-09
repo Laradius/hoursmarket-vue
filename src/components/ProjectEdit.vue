@@ -104,7 +104,7 @@ export default {
 
     axios
       .get(
-        "http://api.hourmarket.hostingasp.pl/api/adminpanel/getcurrentprojects",
+        "http://api.hourmarket.hostingasp.pl/api/data/getcurrentprojects",
         config
       )
       .then(function (response) {

@@ -23,6 +23,7 @@
     <VueSlickCarousel v-if="hourOffers.length > 0" v-bind="settings">
       <div v-for="hourOffer in hourOffers" :key="hourOffer.id">
         <HourOffer
+          :project="projects[hourOffer.project]"
           :id="hourOffer.id"
           :name="hourOffer.name"
           :begindate="hourOffer.beginDate"
@@ -61,11 +62,25 @@ export default {
       requestDone: false,
       unassigned: true,
       apiOffline: true,
+      projects: [],
     };
   },
 
   beforeMount() {
     var vm = this;
+
+    axios
+      .get("http://api.hourmarket.hostingasp.pl/api/data/getcurrentprojects", {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      })
+      .then(function (response) {
+        vm.projectsObject = response.data;
+        for (var i = 0; i < response.data.length; i++) {
+          vm.projects[i] = response.data[i].project;
+        }
+      });
 
     const config1 = {
       headers: { Authorization: `Bearer ${localStorage.token}` },

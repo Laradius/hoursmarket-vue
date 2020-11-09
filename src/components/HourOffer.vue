@@ -5,7 +5,9 @@
         <div class="col"></div>
         <div class="col-4 hourOffer">
           <p>Name: {{ name }}</p>
+          <p>Project: {{ project }}</p>
           <p>Date: {{ begindateformatted }} to {{ enddateformatted }}</p>
+
           <button
             style="margin-right: 5px"
             @click="editHourOffer"
@@ -91,6 +93,7 @@ export default {
       var errorOccured = false;
       var error = null;
       this.disabled = true;
+
       axios
         .delete(
           "http://api.hourmarket.hostingasp.pl/api/houroffers/takehouroffer/" +
@@ -130,7 +133,7 @@ export default {
     };
   },
 
-  props: ["id", "name", "begindate", "enddate", "owned"],
+  props: ["id", "name", "project", "begindate", "enddate", "owned"],
 };
 </script>
 
