@@ -30,7 +30,19 @@
             <br />
             <input v-model="endhour" class="form-control" type="time" />
             <br />
+
+            <select v-model="project" class="custom-select">
+              <option
+                v-bind:value="project.value"
+                :key="project.value"
+                v-for="project in myProjects"
+              >
+                {{ project.project }}
+              </option>
+            </select>
             <br />
+            <br />
+
             <input
               style="margin-right: 5px"
               type="submit"
@@ -66,6 +78,8 @@ export default {
       requestDone: false,
       errorMessage: null,
       error: false,
+      myProjects: [],
+      project: null,
     };
   },
 
@@ -77,18 +91,26 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get(
-        "http://api.hourmarket.hostingasp.pl/api/houroffers/" + vm.id,
-        config
-      )
+      .get("http://api.hourmarket.pl/api/houroffers/" + vm.id, config)
       .then(function (response) {
         vm.beginhour = moment(response.data.beginDate).format("HH:mm");
         vm.begindate = moment(response.data.beginDate).format("YYYY-MM-DD");
         vm.endhour = moment(response.data.endDate).format("HH:mm");
         vm.enddate = moment(response.data.endDate).format("YYYY-MM-DD");
+        vm.project = response.data.project;
+
+        axios
+          .get("http://api.hourmarket.pl/api/data/getmyprojects", {
+            headers: {
+              Authorization: `Bearer ${localStorage.token}`,
+            },
+          })
+          .then(function (response) {
+            vm.myProjects = response.data;
+            vm.requestDone = true;
+          });
 
         vm.apiOffline = false;
-        vm.requestDone = true;
       })
       .catch(function (error) {
         console.log(error);
@@ -172,11 +194,12 @@ export default {
             .utc(this.enddate.toString() + " " + this.endhour.toString())
             .toJSON(),
         },
+        { op: "replace", path: "/project", value: vm.project },
       ];
 
       axios
         .patch(
-          "http://api.hourmarket.hostingasp.pl/api/houroffers/" + vm.id,
+          "http://api.hourmarket.pl/api/houroffers/" + vm.id,
           bodyParameters,
           config
         )

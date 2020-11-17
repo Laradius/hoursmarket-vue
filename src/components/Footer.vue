@@ -1,8 +1,12 @@
 <template>
   <div class="footer">
     <p>
-      &copy; Created by Dawid Derron 2020
+      Administrator Strony - Dawid Derron
       <a href="https://github.com/Laradius">GitHub</a>
+      <a
+        href="https://drive.google.com/file/d/1-V8Y3kHSWAp4JlgsF1CLfoPZR84HWRQp/view?fbclid=IwAR15V-_WbksRmAxtpPF-d9TknKVGRDnS0IjdNwd67OCqc4EeUrF-JTCqezA"
+        >Polityka prywatności</a
+      >
     </p>
   </div>
 </template>

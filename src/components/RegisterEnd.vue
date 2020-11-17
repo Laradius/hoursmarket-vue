@@ -5,8 +5,9 @@
         <div class="col"></div>
         <div class="col-4 formBorder">
           <p v-if="badPassword" class="text-danger p-4">
-            Password must contain minimum eight characters, at least one letter,
-            one number and one special character
+            Hasło musi zawierać minimum 8 znaków, przynajmniej jedną literę,
+            jedną liczbę oraz jeden znak specjalny (@#$%). [Maksymalna długość
+            hasła: 32]
           </p>
 
           <form @submit="registerPost">
@@ -71,7 +72,7 @@ export default {
       var error = null;
       e.preventDefault();
       var reg = new RegExp(
-        "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,32}$"
+        "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,32})"
       );
       if (!reg.test(this.password)) {
         this.badPassword = true;
@@ -89,7 +90,7 @@ export default {
 
       axios
         .post(
-          "http://api.hourmarket.hostingasp.pl/api/register/finish",
+          "http://api.hourmarket.pl/api/register/finish",
           bodyParameters,
           config
         )

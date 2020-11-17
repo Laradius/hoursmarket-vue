@@ -15,7 +15,7 @@
               <option hidden disabled :value="null">Select option</option>
               <option
                 v-bind:value="project.value"
-                :key="project.id"
+                :key="project.value"
                 v-for="project in projects"
               >
                 {{ project.project }}
@@ -70,7 +70,7 @@ export default {
 
       axios
         .post(
-          "http://api.hourmarket.hostingasp.pl/api/adminpanel/changeproject",
+          "http://api.hourmarket.pl/api/adminpanel/changeproject",
           bodyParameters,
           config
         )
@@ -103,10 +103,7 @@ export default {
     };
 
     axios
-      .get(
-        "http://api.hourmarket.hostingasp.pl/api/data/getcurrentprojects",
-        config
-      )
+      .get("http://api.hourmarket.pl/api/data/getcurrentprojects", config)
       .then(function (response) {
         vm.projects = response.data;
       });

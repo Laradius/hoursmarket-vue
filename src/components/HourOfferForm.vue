@@ -30,9 +30,21 @@
             <br />
             <input v-model="endhour" class="form-control" type="time" />
             <br />
+            <select v-model="selected" class="custom-select">
+              <option hidden disabled :value="null">Wybierz projekt</option>
+              <option
+                v-bind:value="project.value"
+                :key="project.value"
+                v-for="project in myProjects"
+              >
+                {{ project.project }}
+              </option>
+            </select>
             <br />
+            <br />
+
             <input
-              :disabled="disabled"
+              :disabled="disabled || selected == null"
               type="submit"
               class="btn btn-primary"
               value="Wystaw"
@@ -63,6 +75,8 @@ export default {
       errorMessage: null,
       error: false,
       disabled: false,
+      myProjects: [],
+      selected: null,
     };
   },
 
@@ -74,14 +88,21 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get(
-        "http://api.hourmarket.hostingasp.pl/api/houroffers/checkunassigned",
-        config
-      )
+      .get("http://api.hourmarket.pl/api/houroffers/checkunassigned", config)
       .then(function (response) {
         vm.unassigned = response.data.unassigned;
         vm.apiOffline = false;
-        vm.requestDone = true;
+
+        axios
+          .get("http://api.hourmarket.pl/api/data/getmyprojects", {
+            headers: {
+              Authorization: `Bearer ${localStorage.token}`,
+            },
+          })
+          .then(function (response) {
+            vm.myProjects = response.data;
+            vm.requestDone = true;
+          });
       })
       .catch(function (error) {
         console.log(error);
@@ -156,14 +177,11 @@ export default {
         enddate: moment
           .utc(this.enddate.toString() + " " + this.endhour.toString())
           .toDate(),
+        project: vm.selected,
       };
 
       axios
-        .post(
-          "http://api.hourmarket.hostingasp.pl/api/houroffers",
-          bodyParameters,
-          config
-        )
+        .post("http://api.hourmarket.pl/api/houroffers", bodyParameters, config)
         .catch(function (err) {
           error = err;
           errorOccured = true;

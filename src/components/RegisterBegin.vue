@@ -43,10 +43,10 @@ export default {
       var vm = this;
       var errorOccured = false;
       var error = null;
-      this.$refs.registerbutton;
+      this.$refs.registerbutton.disabled = true;
       e.preventDefault();
       axios
-        .post("http://api.hourmarket.hostingasp.pl/api/register", {
+        .post("http://api.hourmarket.pl/api/register", {
           email: this.email,
           name: this.name,
         })

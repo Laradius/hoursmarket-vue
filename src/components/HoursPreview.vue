@@ -57,8 +57,21 @@ export default {
   beforeMount() {
     var vm = this;
 
+    const config1 = {
+      headers: { Authorization: `Bearer ${localStorage.token}` },
+    };
+    vm.apiOffline = true;
     axios
-      .get("http://api.hourmarket.hostingasp.pl/api/data/getcurrentprojects", {
+      .get("http://api.hourmarket.pl/api/houroffers/checkunassigned", config1)
+      .then(function (response) {
+        vm.unassigned = response.data.unassigned;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get("http://api.hourmarket.pl/api/data/getcurrentprojects", {
         headers: {
           Authorization: `Bearer ${localStorage.token}`,
         },
@@ -68,33 +81,17 @@ export default {
         for (var i = 0; i < response.data.length; i++) {
           vm.projects[i] = response.data[i].project;
         }
-      });
 
-    const config1 = {
-      headers: { Authorization: `Bearer ${localStorage.token}` },
-    };
-    vm.apiOffline = true;
-    axios
-      .get(
-        "http://api.hourmarket.hostingasp.pl/api/houroffers/checkunassigned",
-        config1
-      )
-      .then(function (response) {
-        vm.unassigned = response.data.unassigned;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    const config = {
-      headers: { Authorization: `Bearer ${localStorage.token}` },
-    };
-
-    axios
-      .get("http://api.hourmarket.hostingasp.pl/api/houroffers", config)
-      .then(function (response) {
-        vm.hourOffers = response.data;
-        vm.requestDone = true;
+        axios
+          .get("http://api.hourmarket.pl/api/houroffers", {
+            headers: {
+              Authorization: `Bearer ${localStorage.token}`,
+            },
+          })
+          .then(function (response) {
+            vm.hourOffers = response.data;
+            vm.requestDone = true;
+          });
       });
   },
 };

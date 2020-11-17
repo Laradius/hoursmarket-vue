@@ -63,7 +63,7 @@ export default {
       var error = null;
       this.disabled = true;
       axios
-        .delete("http://api.hourmarket.hostingasp.pl/api/houroffers/" + vm.id, {
+        .delete("http://api.hourmarket.pl/api/houroffers/" + vm.id, {
           headers: {
             Authorization: `Bearer ${localStorage.token}`,
           },
@@ -96,8 +96,7 @@ export default {
 
       axios
         .delete(
-          "http://api.hourmarket.hostingasp.pl/api/houroffers/takehouroffer/" +
-            vm.id,
+          "http://api.hourmarket.pl/api/houroffers/takehouroffer/" + vm.id,
           {
             headers: {
               Authorization: `Bearer ${localStorage.token}`,

@@ -1,7 +1,7 @@
 <template>
   <div class="hourOfferPreview">
     <span
-      v-if="!this.unassigned && this.requestDone && hourOffers.length < 1"
+      v-if="!unassigned && requestDone && hourOffers.length < 1"
       class="text-warning bg-dark p-4 rounded"
     >
       No hour offers currently posted. Post some at Home section.
@@ -69,28 +69,12 @@ export default {
   beforeMount() {
     var vm = this;
 
-    axios
-      .get("http://api.hourmarket.hostingasp.pl/api/data/getcurrentprojects", {
-        headers: {
-          Authorization: `Bearer ${localStorage.token}`,
-        },
-      })
-      .then(function (response) {
-        vm.projectsObject = response.data;
-        for (var i = 0; i < response.data.length; i++) {
-          vm.projects[i] = response.data[i].project;
-        }
-      });
-
     const config1 = {
       headers: { Authorization: `Bearer ${localStorage.token}` },
     };
     vm.apiOffline = true;
     axios
-      .get(
-        "http://api.hourmarket.hostingasp.pl/api/houroffers/checkunassigned",
-        config1
-      )
+      .get("http://api.hourmarket.pl/api/houroffers/checkunassigned", config1)
       .then(function (response) {
         vm.apiOffline = false;
         vm.requestDone = true;
@@ -102,17 +86,27 @@ export default {
         vm.requestDone = true;
       });
 
-    const config2 = {
-      headers: { Authorization: `Bearer ${localStorage.token}` },
-    };
-
     axios
-      .get(
-        "http://api.hourmarket.hostingasp.pl/api/houroffers/myoffers",
-        config2
-      )
+      .get("http://api.hourmarket.pl/api/data/getcurrentprojects", {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      })
       .then(function (response) {
-        vm.hourOffers = response.data;
+        vm.projectsObject = response.data;
+        for (var i = 0; i < response.data.length; i++) {
+          vm.projects[i] = response.data[i].project;
+        }
+
+        axios
+          .get("http://api.hourmarket.pl/api/houroffers/myoffers", {
+            headers: {
+              Authorization: `Bearer ${localStorage.token}`,
+            },
+          })
+          .then(function (response) {
+            vm.hourOffers = response.data;
+          });
       });
   },
 };

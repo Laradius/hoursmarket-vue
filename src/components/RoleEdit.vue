@@ -15,7 +15,7 @@
               <option hidden disabled :value="null">Select option</option>
               <option
                 v-bind:value="role.value"
-                :key="role.id"
+                :key="role.value"
                 v-for="role in roles"
               >
                 {{ role.role }}
@@ -70,7 +70,7 @@ export default {
 
       axios
         .post(
-          "http://api.hourmarket.hostingasp.pl/api/adminpanel/changerole",
+          "http://api.hourmarket.pl/api/adminpanel/changerole",
           bodyParameters,
           config
         )
@@ -103,10 +103,7 @@ export default {
     };
 
     axios
-      .get(
-        "http://api.hourmarket.hostingasp.pl/api/adminpanel/getroles",
-        config
-      )
+      .get("http://api.hourmarket.pl/api/adminpanel/getroles", config)
       .then(function (response) {
         vm.roles = response.data;
       });
