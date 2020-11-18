@@ -2,12 +2,12 @@
   <div class="hourOfferPreview">
     <br v-if="hourOffers.length < 1 && this.requestDone" />
     <br v-if="hourOffers.length < 1 && this.requestDone" />
-    <span
+    <p
       v-if="hourOffers.length < 1 && this.requestDone && !unassigned"
-      class="text-warning bg-dark p-4 rounded"
+      class="text-warning confirmationMsg bg-dark p-4 rounded"
     >
       No hour offers currently posted. Now that's sad.
-    </span>
+    </p>
     <VueSlickCarousel v-if="hourOffers.length > 0" v-bind="settings">
       <div v-for="hourOffer in hourOffers" :key="hourOffer.id">
         <HourOffer

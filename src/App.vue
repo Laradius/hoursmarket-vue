@@ -4,10 +4,10 @@
     <Logout v-if="tokenExists" class="logout-button"></Logout>
     <div id="nav">
       <router-link v-if="tokenExists" to="/">Home</router-link>
-      <span v-if="tokenExists">|</span>
+      <span v-if="tokenExists">&nbsp;|&nbsp;</span>
       <router-link v-if="tokenExists" to="/MyHours">My Hours</router-link>
       <router-link v-if="!tokenExists" to="/login">Login</router-link>
-      <span v-if="!tokenExists">|</span>
+      <span v-if="!tokenExists">&nbsp;|&nbsp;</span>
       <router-link v-if="!tokenExists" to="/register">Register</router-link>
     </div>
     <router-view />

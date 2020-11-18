@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col"></div>
-        <div class="col-4 formBorder">
+        <div class="col-8 col-md-4 formBorder">
           <form @submit="loginPost" class="formInside">
             <p>Email:</p>
             <input v-model="email" class="form-control" type="email" required />
@@ -28,6 +28,12 @@
         <div class="col"></div>
       </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 

@@ -1,24 +1,24 @@
 <template>
   <div class="hourOfferPreview">
-    <span
+    <p
       v-if="!unassigned && requestDone && hourOffers.length < 1"
-      class="text-warning bg-dark p-4 rounded"
+      class="text-warning confirmationMsg bg-dark p-4 rounded"
     >
       No hour offers currently posted. Post some at Home section.
-    </span>
+    </p>
 
-    <span
+    <p
       v-if="apiOffline && requestDone"
-      class="text-danger bg-dark p-4 rounded"
+      class="text-danger confirmationMsg bg-dark p-4 rounded"
     >
       API server is offline. Contact page administrator.
-    </span>
-    <span
+    </p>
+    <p
       v-if="unassigned && requestDone"
-      class="text-warning bg-dark p-4 rounded"
+      class="text-warning confirmationMsg bg-dark p-4 rounded"
     >
       You are not assigned to any project. Contact page administrator.
-    </span>
+    </p>
 
     <VueSlickCarousel v-if="hourOffers.length > 0" v-bind="settings">
       <div v-for="hourOffer in hourOffers" :key="hourOffer.id">
@@ -77,7 +77,6 @@ export default {
       .get("http://api.hourmarket.pl/api/houroffers/checkunassigned", config1)
       .then(function (response) {
         vm.apiOffline = false;
-        vm.requestDone = true;
         vm.unassigned = response.data.unassigned;
       })
       .catch(function (error) {
@@ -85,6 +84,10 @@ export default {
         vm.apiOffline = true;
         vm.requestDone = true;
       });
+
+    if (vm.requestDone) {
+      return;
+    }
 
     axios
       .get("http://api.hourmarket.pl/api/data/getcurrentprojects", {
@@ -106,6 +109,7 @@ export default {
           })
           .then(function (response) {
             vm.hourOffers = response.data;
+            vm.requestDone = true;
           });
       });
   },

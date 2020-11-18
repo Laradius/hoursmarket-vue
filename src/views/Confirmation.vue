@@ -1,11 +1,11 @@
 <template>
   <div>
-    <span v-if="!error" class="text-success bg-dark p-4 rounded">
+    <p v-if="!error" class="text-success confirmationMsg bg-dark p-4 rounded">
       {{ message }}
-    </span>
-    <span v-if="error" class="text-danger bg-dark p-4 rounded">
+    </p>
+    <p v-if="error" class="text-danger confirmationMsg bg-dark p-4 rounded">
       {{ message }}
-    </span>
+    </p>
     <br />
     <br />
     <br />
@@ -40,4 +40,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.confirmationMsg {
+  width: 65%;
+  margin: auto;
+}
+</style>

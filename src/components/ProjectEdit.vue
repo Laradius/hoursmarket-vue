@@ -11,20 +11,18 @@
             <input v-model="email" class="form-control" type="email" required />
             <br />
 
-            <select v-model="selected" class="custom-select" required>
-              <option hidden disabled :value="null">Select option</option>
-              <option
-                v-bind:value="project.value"
-                :key="project.value"
-                v-for="project in projects"
-              >
-                {{ project.project }}
-              </option>
-            </select>
-            <br />
+            <div :key="project.value" v-for="project in projects">
+              <input
+                name="project"
+                v-on:change="changed()"
+                type="checkbox"
+                :value="project.value"
+              />
+              <span>{{ project.project }}</span>
+            </div>
             <br />
             <input
-              :disabled="this.selected == null"
+              :disabled="disabled"
               type="submit"
               class="btn btn-primary"
               value="Proceed"
@@ -47,13 +45,24 @@ export default {
 
   data() {
     return {
-      selected: null,
       projects: null,
       email: null,
+      selected: null,
+      disabled: true,
     };
   },
 
   methods: {
+    changed() {
+      if (
+        document.querySelectorAll("input[name=project]:checked").length <= 0
+      ) {
+        this.disabled = true;
+      } else {
+        this.disabled = false;
+      }
+    },
+
     changeRole(e) {
       e.preventDefault();
       var vm = this;
@@ -63,9 +72,22 @@ export default {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       };
 
+      var selectedProjects = "";
+      var checkedBoxes = document.querySelectorAll(
+        "input[name=project]:checked"
+      );
+
+      for (let i = 0; i < checkedBoxes.length; i++) {
+        if (i == checkedBoxes.length - 1) {
+          selectedProjects += checkedBoxes[i].value;
+        } else {
+          selectedProjects += checkedBoxes[i].value + ";";
+        }
+      }
+
       const bodyParameters = {
         email: this.email,
-        value: this.selected,
+        value: selectedProjects,
       };
 
       axios

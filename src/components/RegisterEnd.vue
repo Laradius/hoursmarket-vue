@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col"></div>
-        <div class="col-4 formBorder">
+        <div class="col-8 col-md-4 formBorder">
           <p v-if="badPassword" class="text-danger p-4">
             Hasło musi zawierać minimum 8 znaków, przynajmniej jedną literę,
             jedną liczbę oraz jeden znak specjalny (@#$%). [Maksymalna długość
@@ -11,9 +11,9 @@
           </p>
 
           <form @submit="registerPost">
-            <h3>Finish registration by typing password.</h3>
+            <h4 class="text-center">Zakończ rejestracje wpisując hasło.</h4>
             <br />
-            <p>Password:</p>
+            <p>Hasło:</p>
             <input
               v-model="password"
               class="form-control"
@@ -26,13 +26,19 @@
               :disabled="disabled"
               type="submit"
               class="btn btn-primary"
-              value="Register"
+              value="Zarejestruj"
             />
           </form>
         </div>
         <div class="col"></div>
       </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 

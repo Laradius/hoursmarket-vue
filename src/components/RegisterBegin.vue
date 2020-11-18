@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col"></div>
-        <div class="col-4 formBorder">
+        <div class="col-8 col-md-4 formBorder">
           <form @submit="registerPost">
             <p>Name:</p>
             <input v-model="name" class="form-control" type="text" required />
@@ -11,18 +11,24 @@
             <p>Email:</p>
             <input v-model="email" class="form-control" type="email" required />
             <br />
-            <br />
+            <p>Zakładając konto zgadzasz się z polityką prywatności.</p>
             <input
               ref="registerbutton"
               type="submit"
               class="btn btn-primary"
-              value="Send Registration Link"
+              value="Rozpocznij"
             />
           </form>
         </div>
         <div class="col"></div>
       </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 

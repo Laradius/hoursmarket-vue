@@ -1,17 +1,17 @@
 <template >
   <div v-cloak>
-    <span
+    <p
       v-if="apiOffline && requestDone"
-      class="text-danger bg-dark p-4 rounded"
+      class="text-danger confirmationMsg bg-dark p-4 rounded"
     >
       API server is offline. Contact page administrator.
-    </span>
-    <span
+    </p>
+    <p
       v-if="unassigned && requestDone"
-      class="text-warning bg-dark p-4 rounded"
+      class="text-warning confirmationMsg bg-dark p-4 rounded"
     >
       You are not assigned to any project. Contact page administrator.
-    </span>
+    </p>
 
     <div v-if="!unassigned && !apiOffline && requestDone" class="container">
       <div class="row">
