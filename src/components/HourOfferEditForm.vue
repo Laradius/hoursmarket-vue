@@ -91,7 +91,7 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("http://api.hourmarket.pl/api/houroffers/" + vm.id, config)
+      .get("https://api.hourmarket.pl/api/houroffers/" + vm.id, config)
       .then(function (response) {
         vm.beginhour = moment(response.data.beginDate).format("HH:mm");
         vm.begindate = moment(response.data.beginDate).format("YYYY-MM-DD");
@@ -100,7 +100,7 @@ export default {
         vm.project = response.data.project;
 
         axios
-          .get("http://api.hourmarket.pl/api/data/getmyprojects", {
+          .get("https://api.hourmarket.pl/api/data/getmyprojects", {
             headers: {
               Authorization: `Bearer ${localStorage.token}`,
             },
@@ -199,7 +199,7 @@ export default {
 
       axios
         .patch(
-          "http://api.hourmarket.pl/api/houroffers/" + vm.id,
+          "https://api.hourmarket.pl/api/houroffers/" + vm.id,
           bodyParameters,
           config
         )

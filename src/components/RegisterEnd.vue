@@ -96,7 +96,7 @@ export default {
 
       axios
         .post(
-          "http://api.hourmarket.pl/api/register/finish",
+          "https://api.hourmarket.pl/api/register/finish",
           bodyParameters,
           config
         )

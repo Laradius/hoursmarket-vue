@@ -21,7 +21,7 @@ export default {
 .footer {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 10px 0px;
-  margin-top: 400px;
+  margin-top: 500px;
 }
 p {
   color: white;

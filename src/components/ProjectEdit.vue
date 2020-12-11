@@ -92,7 +92,7 @@ export default {
 
       axios
         .post(
-          "http://api.hourmarket.pl/api/adminpanel/changeproject",
+          "https://api.hourmarket.pl/api/adminpanel/changeproject",
           bodyParameters,
           config
         )
@@ -125,7 +125,7 @@ export default {
     };
 
     axios
-      .get("http://api.hourmarket.pl/api/data/getcurrentprojects", config)
+      .get("https://api.hourmarket.pl/api/data/getcurrentprojects", config)
       .then(function (response) {
         vm.projects = response.data;
       });

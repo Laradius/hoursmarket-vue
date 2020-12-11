@@ -20,6 +20,8 @@
         ></HourOffer>
       </div>
     </VueSlickCarousel>
+    <br />
+    <br />
   </div>
 </template>
 
@@ -62,7 +64,7 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("http://api.hourmarket.pl/api/houroffers/checkunassigned", config1)
+      .get("https://api.hourmarket.pl/api/houroffers/checkunassigned", config1)
       .then(function (response) {
         vm.unassigned = response.data.unassigned;
       })
@@ -71,7 +73,7 @@ export default {
       });
 
     axios
-      .get("http://api.hourmarket.pl/api/data/getcurrentprojects", {
+      .get("https://api.hourmarket.pl/api/data/getcurrentprojects", {
         headers: {
           Authorization: `Bearer ${localStorage.token}`,
         },
@@ -83,7 +85,7 @@ export default {
         }
 
         axios
-          .get("http://api.hourmarket.pl/api/houroffers", {
+          .get("https://api.hourmarket.pl/api/houroffers", {
             headers: {
               Authorization: `Bearer ${localStorage.token}`,
             },

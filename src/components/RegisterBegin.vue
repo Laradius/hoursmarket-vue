@@ -52,7 +52,7 @@ export default {
       this.$refs.registerbutton.disabled = true;
       e.preventDefault();
       axios
-        .post("http://api.hourmarket.pl/api/register", {
+        .post("https://api.hourmarket.pl/api/register", {
           email: this.email,
           name: this.name,
         })

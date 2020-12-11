@@ -88,13 +88,13 @@ export default {
     };
     vm.apiOffline = true;
     axios
-      .get("http://api.hourmarket.pl/api/houroffers/checkunassigned", config)
+      .get("https://api.hourmarket.pl/api/houroffers/checkunassigned", config)
       .then(function (response) {
         vm.unassigned = response.data.unassigned;
         vm.apiOffline = false;
 
         axios
-          .get("http://api.hourmarket.pl/api/data/getmyprojects", {
+          .get("https://api.hourmarket.pl/api/data/getmyprojects", {
             headers: {
               Authorization: `Bearer ${localStorage.token}`,
             },
@@ -181,7 +181,11 @@ export default {
       };
 
       axios
-        .post("http://api.hourmarket.pl/api/houroffers", bodyParameters, config)
+        .post(
+          "https://api.hourmarket.pl/api/houroffers",
+          bodyParameters,
+          config
+        )
         .catch(function (err) {
           error = err;
           errorOccured = true;

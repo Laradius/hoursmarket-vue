@@ -58,7 +58,7 @@ export default {
       this.$refs.loginbutton.disabled = true;
 
       axios
-        .post("http://api.hourmarket.pl/api/login", {
+        .post("https://api.hourmarket.pl/api/login", {
           email: this.email,
           password: this.password,
         })
